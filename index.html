@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Global Shift</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body class="relative">
+
+<!-- Hero Section -->
+<div class="hero text-center text-white flex flex-col justify-center items-center h-screen bg-cover bg-center">
+  <h1 class="text-4xl font-bold">Global Shift</h1>
+  <h3 class="text-xl text-gray-300">Visualizing Climate Impact</h3>
+
+  <!-- Scroll Button -->
+  <a href="#homePage" class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+    <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </a>
+</div>
+
+<!-- Spacer for navbar height -->
+<div class="h-20"></div>
+
+    <!-- Fixed Nav Bar -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-lg z-50 opacity-0 pointer-events-none transition-opacity duration-700">
+        <div class="max-w-8xl mx-auto px-6 py-6 flex items-center justify-between min-h-20">
+        <!-- Left: Klima -->
+        <div class="text-4xl pl-24 font-bold cursor-pointer hover:text-green-400 transition">
+            <a href="#homePage">K L I M A</a>
+        </div>
+        <!-- Right: Nav Items -->
+        <ul class="flex space-x-12 text-xl font-medium ml-auto items-center">
+            <li class="hover:text-green-400 cursor-pointer transition">World Map</li>
+            <li class="hover:text-green-400 cursor-pointer transition">Analytics</li>
+            <li class="hover:text-green-400 cursor-pointer transition">Datasets</li>
+            <li class="relative">
+            <div class="flex items-center">
+                <input 
+                type="text" 
+                placeholder="Search..." 
+                class="bg-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 w-64 transition-all duration-300"
+                >
+                <button class="ml-2 p-2 text-gray-400 hover:text-green-400 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                </button>
+            </div>
+            </li>
+        </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="homePage" class="flex flex-col bg-black">
+        <div class="w-full" style="height: 60vh;">
+            <img 
+                src="imgs/background/Impacts of Climate Change in Contrast.png" 
+                class="w-full h-full object-cover"
+                alt="Climate Change Impacts Visualization"
+            >
+        </div>
+        <div class="flex-1 flex items-center justify-center p-4 bg-black">
+            <p class="text-2xl text-white max-w-4xl text-center leading-relaxed">
+                Climate Change refers to long-term shifts in temperatures and weather patterns, mainly caused by human activities such as burning fossil fuels and deforestation. These changes are already affecting the planet through rising global temperatures, melting ice caps, and more extreme weather events. Understanding climate change is essential for protecting our environment, health, and future generations.
+            </p>
+        </div>
+    </div>
+
+<!-- Section 2: Global Warming Impacts -->
+<div class="min-h-screen bg-black py-20 px-8">
+    <div class="max-w-7xl mx-auto space-y-20">
+      
+      <!-- Rising Temperatures - Image Left / Text Right -->
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+        <!-- Image on Left -->
+        <div class="w-full lg:w-1/2">
+          <img 
+            src="imgs/background/global-warming.jpg" 
+            class="w-full h-auto max-h-[60vh] object-cover rounded-lg shadow-xl"
+            alt="Global Warming Visualization"
+          >
+        </div>
+        
+        <!-- Text on Right -->
+        <div class="w-full lg:w-1/2 text-white">
+          <h2 class="text-4xl font-bold mb-6 text-green-400">Rising Global Temperatures</h2>
+          <p class="text-xl leading-relaxed mb-6">
+            The Earth's surface temperature has risen significantly over the past century, mainly due to increased emissions of greenhouse gases like CO₂, CH₄, and N₂O from burning fossil fuels, deforestation, and industrial activities.
+          </p>
+          <h3 class="text-2xl font-semibold mb-4">Key Impacts:</h3>
+          <ul class="space-y-4 text-lg">
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-green-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+              </svg>
+              <span>Heatwaves becoming more frequent and intense, posing health risks</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-green-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+              </svg>
+              <span>Prolonged droughts affecting agriculture and water supplies</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-green-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+              </svg>
+              <span>More severe wildfires destroying ecosystems and communities</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Ice Melting - Text Left / Image Right -->
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+        <!-- Text on Left -->
+        <div class="w-full lg:w-1/2 text-white order-2 lg:order-1">
+          <h2 class="text-4xl font-bold mb-6 text-blue-400">Melting Ice & Rising Seas</h2>
+          <p class="text-xl leading-relaxed mb-6">
+            The polar ice caps and glaciers are melting at an alarming rate due to rising temperatures, contributing to rising sea levels and disrupting ecosystems worldwide.
+          </p>
+          <h3 class="text-2xl font-semibold mb-4">Key Impacts:</h3>
+          <ul class="space-y-4 text-lg">
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-blue-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+              </svg>
+              <span>Coastal flooding and erosion threatening communities</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-blue-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+              </svg>
+              <span>Loss of habitat for polar species like bears and seals</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-blue-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+              </svg>
+              <span>Disruption of ocean currents and weather patterns</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Image on Right -->
+        <div class="w-full lg:w-1/2 order-1 lg:order-2">
+          <img 
+            src="imgs/background/05-may_sea-level-rise.png" 
+            class="w-full h-auto max-h-[60vh] object-cover rounded-lg shadow-xl"
+            alt="Sea Level Rise Visualization"
+          >
+        </div>
+      </div>
+  
+      <!-- Weather Patterns - Image Left / Text Right -->
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+        <!-- Image on Left -->
+        <div class="w-full lg:w-1/2">
+          <img 
+            src="imgs/background/PHOTO-Climate-Collage-Diagonal-Design-NOAA-Communications-NO-NOAA-Logo.jpg" 
+            class="w-full h-auto max-h-[60vh] object-cover rounded-lg shadow-xl"
+            alt="Weather Pattern Disruption"
+          >
+        </div>
+        
+        <!-- Text on Right -->
+        <div class="w-full lg:w-1/2 text-white">
+          <h2 class="text-4xl font-bold mb-6 text-purple-400">Disruption of Weather Patterns</h2>
+          <p class="text-xl leading-relaxed mb-6">
+            Climate change alters atmospheric circulation, which influences the jet stream and ocean currents. This causes changes in precipitation patterns, storm intensity, and seasonal behavior.
+          </p>
+          <h3 class="text-2xl font-semibold mb-4">Key Impacts:</h3>
+          <ul class="space-y-4 text-lg">
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-purple-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+              </svg>
+              <span>Stronger hurricanes and typhoons due to warmer ocean water providing more energy</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-purple-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+              </svg>
+              <span>Unpredictable rainfall patterns leading to both floods and droughts</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="h-6 w-6 text-purple-400 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
+              </svg>
+              <span>Shifting seasons affecting agriculture and natural ecosystems</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  <script>
+    const navbar = document.getElementById("navbar");
+    const heroSection = document.querySelector('.hero');
+    
+    function checkHeroVisibility() {
+      const heroRect = heroSection.getBoundingClientRect();
+      const heroBottom = heroRect.bottom;
+      const isHeroVisible = heroBottom > 0;
+      
+      // Toggle fast transition when hero is not visible
+      navbar.classList.toggle('fast-transition', !isHeroVisible);
+      
+      // Show/hide navbar based on scroll position
+      if (window.scrollY > window.innerHeight - 50 || !isHeroVisible) {
+        navbar.classList.remove("opacity-0", "pointer-events-none");
+        navbar.classList.add("opacity-100", "pointer-events-auto");
+      } else {
+        navbar.classList.remove("opacity-100", "pointer-events-auto");
+        navbar.classList.add("opacity-0", "pointer-events-none");
+      }
+    }
+    
+    // Use requestAnimationFrame for smooth performance
+    function handleScroll() {
+      requestAnimationFrame(checkHeroVisibility);
+    }
+    
+    // Add event listeners
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    
+    // Initial check
+    document.addEventListener('DOMContentLoaded', checkHeroVisibility);
+  </script>
+</body>
+</html>
