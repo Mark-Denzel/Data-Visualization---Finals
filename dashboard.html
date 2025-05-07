@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Global Shift</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="relative bg-black">
+<!-- Spacer for navbar height -->
+<div class="h-20"></div>
+    <nav id="navbar" class="fixed top-0 left-0 w-full bg-gray-900 text-white shadow-lg z-50 transition-opacity duration-700">
+        <div class="max-w-8xl mx-auto px-6 py-6 flex items-center justify-between min-h-20">
+            <!-- Left: Klima with Icon -->
+            <div class="flex items-center pl-6 space-x-3">
+                <!-- Earth Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div class="text-4xl font-bold cursor-pointer hover:text-green-400 transition">
+                    <a href="index.html">K L I M A</a>
+                </div>
+            </div>
+            
+            <!-- Right: Nav Items with Icons -->
+            <ul class="flex space-x-12 text-xl font-medium ml-auto items-center">
+                <li class="flex items-center hover:text-green-400 cursor-pointer transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="flex items-center hover:text-green-400 cursor-pointer transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    <a href="worldmap.html">World Map</a>
+                </li>
+                <li class="flex items-center hover:text-green-400 cursor-pointer transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    <a href="analytics.html">Analytics</a>
+                </li>
+                <li class="flex items-center hover:text-green-400 cursor-pointer transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+                    </svg>
+                    <a href="datasets.html">Datasets</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+  </div>
+
+  <div class="min-h-screen bg-black py-20 px-4 sm:px-6 lg:px-8">
+    <!-- Dashboard Header -->
+    <div class="max-w-8xl mx-auto mb-8">
+      <h1 class="text-3xl font-bold text-green-400">Climate Dashboard</h1>
+      <p class="text-gray-400 mt-2">Real-time monitoring of global climate indicators</p>
+      
+      <!-- Date/Time and Stats Row -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 gap-4">
+        <div class="text-gray-300">
+          <span id="current-date" class="font-medium"></span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full sm:w-auto">
+          <!-- Stat Cards -->
+          <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-green-500">
+            <p class="text-gray-400 text-sm">Global Temp</p>
+            <p class="text-2xl font-bold text-white">+1.2°C</p>
+            <p class="text-xs text-gray-500">since 1900</p>
+          </div>
+          <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-blue-500">
+            <p class="text-gray-400 text-sm">CO₂ Level</p>
+            <p class="text-2xl font-bold text-white">419 ppm</p>
+            <p class="text-xs text-gray-500">+50% since 1850</p>
+          </div>
+          <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-yellow-500">
+            <p class="text-gray-400 text-sm">Sea Level</p>
+            <p class="text-2xl font-bold text-white">+102mm</p>
+            <p class="text-xs text-gray-500">since 1993</p>
+          </div>
+          <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-red-500">
+            <p class="text-gray-400 text-sm">Arctic Ice</p>
+            <p class="text-2xl font-bold text-white">-13.1%</p>
+            <p class="text-xs text-gray-500">per decade</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Main Dashboard Grid -->
+    <div class="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+      
+      <!-- Temperature Trend Chart -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-800">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold text-white">Global Temperature Anomalies</h2>
+          <select class="bg-gray-800 text-white text-sm rounded px-3 py-1 border border-gray-700">
+            <option>Last 100 Years</option>
+            <option>Last 50 Years</option>
+            <option>Last 20 Years</option>
+          </select>
+        </div>
+        <div class="h-80" id="temperature-chart">
+          <!-- Chart will be rendered here by JavaScript -->
+          <div class="flex items-center justify-center h-full text-gray-500">
+            <p>Temperature trend chart will appear here</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- CO₂ Concentration Chart -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-800">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold text-white">Atmospheric CO₂ Concentration</h2>
+          <select class="bg-gray-800 text-white text-sm rounded px-3 py-1 border border-gray-700">
+            <option>Mauna Loa Data</option>
+            <option>Global Average</option>
+          </select>
+        </div>
+        <div class="h-80" id="co2-chart">
+          <div class="flex items-center justify-center h-full text-gray-500">
+            <p>CO₂ concentration chart will appear here</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Regional Breakdown -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-800 lg:col-span-2">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold text-white">Regional Climate Indicators</h2>
+          <div class="flex gap-2">
+            <button class="bg-gray-800 hover:bg-gray-700 text-white text-sm rounded px-3 py-1 border border-gray-700 transition">
+              Temperature
+            </button>
+            <button class="bg-gray-800 hover:bg-gray-700 text-white text-sm rounded px-3 py-1 border border-gray-700 transition">
+              Precipitation
+            </button>
+            <button class="bg-gray-800 hover:bg-gray-700 text-white text-sm rounded px-3 py-1 border border-gray-700 transition">
+              Extreme Events
+            </button>
+          </div>
+        </div>
+        <div class="h-96" id="regional-chart">
+          <div class="flex items-center justify-center h-full text-gray-500">
+            <p>Regional breakdown visualization will appear here</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Recent Events -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-800">
+        <h2 class="text-xl font-semibold text-white mb-4">Recent Climate Events</h2>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3 p-3 hover:bg-gray-800 rounded-lg transition">
+            <div class="bg-red-500/20 p-2 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-medium text-white">Heatwave in Europe</h3>
+              <p class="text-sm text-gray-400">Record temperatures in Spain and Portugal reached 47°C</p>
+              <p class="text-xs text-gray-500 mt-1">2 days ago</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 hover:bg-gray-800 rounded-lg transition">
+            <div class="bg-blue-500/20 p-2 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-medium text-white">Flooding in Pakistan</h3>
+              <p class="text-sm text-gray-400">Unprecedented monsoon rains affect 33 million people</p>
+              <p class="text-xs text-gray-500 mt-1">1 week ago</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3 p-3 hover:bg-gray-800 rounded-lg transition">
+            <div class="bg-yellow-500/20 p-2 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.504 1.132a1 1 0 01.992 0l1.75 1a1 1 0 11-.992 1.736L10 3.152l-1.254.716a1 1 0 11-.992-1.736l1.75-1zM5.618 4.504a1 1 0 01-.372 1.364L5.016 6l.23.132a1 1 0 11-.992 1.736L4 7.723V8a1 1 0 01-2 0V6a.996.996 0 01.52-.878l1.734-.99a1 1 0 011.364.372zm8.764 0a1 1 0 011.364-.372l1.733.99A1.002 1.002 0 0118 6v2a1 1 0 11-2 0v-.277l-.254.145a1 1 0 11-.992-1.736l.23-.132-.23-.132a1 1 0 01-.372-1.364zm-7 4a1 1 0 011.364-.372L10 8.848l1.254-.716a1 1 0 11.992 1.736L11 10.58V12a1 1 0 11-2 0v-1.42l-1.246-.712a1 1 0 01-.372-1.364zM3 11a1 1 0 011 1v1.42l1.246.712a1 1 0 11-.992 1.736l-1.75-1A1 1 0 012 14v-2a1 1 0 011-1zm14 0a1 1 0 011 1v2a1 1 0 01-.504.868l-1.75 1a1 1 0 11-.992-1.736L16 13.42V12a1 1 0 011-1zm-9.618 5.504a1 1 0 011.364-.372l.254.145V16a1 1 0 112 0v.277l.254-.145a1 1 0 11.992 1.736l-1.735.992a.995.995 0 01-1.022 0l-1.735-.992a1 1 0 01-.372-1.364z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-medium text-white">Drought in Horn of Africa</h3>
+              <p class="text-sm text-gray-400">Worst drought in 40 years threatens famine</p>
+              <p class="text-xs text-gray-500 mt-1">2 weeks ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Carbon Emissions by Country -->
+      <div class="bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-800">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold text-white">Top CO₂ Emitters</h2>
+          <select class="bg-gray-800 text-white text-sm rounded px-3 py-1 border border-gray-700">
+            <option>Per Capita</option>
+            <option>Total Emissions</option>
+          </select>
+        </div>
+        <div class="h-80" id="emissions-chart">
+          <div class="flex items-center justify-center h-full text-gray-500">
+            <p>Emissions by country chart will appear here</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Chart.js for visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+  // Set current date
+  document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+  
+  // Sample chart initialization (you would replace with real data)
+  document.addEventListener('DOMContentLoaded', function() {
+    // Temperature Chart
+    const tempCtx = document.getElementById('temperature-chart');
+    new Chart(tempCtx, {
+      type: 'line',
+      data: {
+        labels: ['1900', '1920', '1940', '1960', '1980', '2000', '2020'],
+        datasets: [{
+          label: 'Temperature Anomaly (°C)',
+          data: [-0.2, -0.1, 0.1, 0.3, 0.5, 0.8, 1.2],
+          borderColor: '#4ade80',
+          backgroundColor: 'rgba(74, 222, 128, 0.1)',
+          borderWidth: 2,
+          tension: 0.3,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { mode: 'index', intersect: false }
+        },
+        scales: {
+          y: {
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            ticks: { color: '#9ca3af' }
+          },
+          x: {
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            ticks: { color: '#9ca3af' }
+          }
+        }
+      }
+    });
+  
+    // You would add similar initialization for other charts
+  });
+  </script>
+</body>
+</html>
