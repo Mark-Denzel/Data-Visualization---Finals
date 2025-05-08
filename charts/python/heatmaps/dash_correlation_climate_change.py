@@ -1,15 +1,20 @@
+# charts/python/dash_climatecorr.py
+
 import pandas as pd
 import numpy as np
 import plotly.express as px
 from dash import Dash, dcc, html, Input, Output
 import dash_bootstrap_components as dbc
 
+# Load and prepare data
 df = pd.read_csv('datasets/Climate_Change_Dataset.csv')
 
 numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
 numeric_cols = [col for col in numeric_cols if col not in ['Year']]
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+# Initialize Dash app with specific path prefix for mounting
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], requests_pathname_prefix='/climate/')
+server = app.server
 
 app.layout = dbc.Container([
     html.H1("Climate Change Data Correlation Analysis", className="mb-4 text-center"),
@@ -59,13 +64,10 @@ app.layout = dbc.Container([
 )
 def update_heatmap(year_range):
     filtered_df = df[(df['Year'] >= year_range[0]) & (df['Year'] <= year_range[1])]
-    
     filtered_df = filtered_df.dropna(subset=numeric_cols)
-    
     aggregated_df = filtered_df.groupby(['Year', 'Country'])[numeric_cols].mean().reset_index()
-    
     corr_matrix = aggregated_df[numeric_cols].corr()
-    
+
     fig = px.imshow(
         corr_matrix,
         x=corr_matrix.columns,
@@ -76,7 +78,6 @@ def update_heatmap(year_range):
         title=f"Correlation Between Climate Factors ({year_range[0]} - {year_range[1]})",
         text_auto=".2f"
     )
-
     fig.update_layout(
         height=800,
         width=1000,
@@ -85,11 +86,6 @@ def update_heatmap(year_range):
         coloraxis_colorbar=dict(title="Correlation"),
         font=dict(size=10)
     )
-
     fig.update_xaxes(tickangle=45)
     fig.update_traces(hovertemplate="<b>%{y}</b> vs <b>%{x}</b><br>Correlation: %{z:.2f}<extra></extra>")
-    
     return fig
-
-if __name__ == '__main__':
-    app.run(debug=True, port=8050)

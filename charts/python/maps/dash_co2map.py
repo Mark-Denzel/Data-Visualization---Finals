@@ -3,6 +3,7 @@
 import pandas as pd
 import plotly.express as px
 from dash import Dash, dcc, html, Input, Output
+import numpy as np
 
 DATA_FILE = "datasets/yearly-co2-emissions.csv"
 df = pd.read_csv(DATA_FILE)
@@ -11,6 +12,7 @@ df = pd.read_csv(DATA_FILE)
 df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
 df['Annual CO₂ emissions'] = pd.to_numeric(df['Annual CO₂ emissions'], errors='coerce')
 df = df.dropna(subset=['Year', 'Annual CO₂ emissions'])
+df['Log Emissions'] = np.log10(df['Annual CO₂ emissions'].replace(0, np.nan))
 
 MIN_EMISSIONS = 0
 MAX_EMISSIONS = 10_000_000_000
@@ -89,17 +91,18 @@ app.layout = html.Div([
     Input('year-slider', 'value')
 )
 def update_map(selected_year: int):
-    filtered_df = df[df['Year'] == selected_year]
+    filtered_df = df[df['Year'] == selected_year].copy()
+    filtered_df['Log Emissions'] = np.log10(filtered_df['Annual CO₂ emissions'].replace(0, np.nan))
 
     fig = px.choropleth(
         filtered_df,
         locations='Entity',
         locationmode='country names',
-        color='Annual CO₂ emissions',
+        color='Log Emissions',
         hover_name='Entity',
         hover_data={'Annual CO₂ emissions': ':,.0f', 'Code': True},
         color_continuous_scale=COLOR_SCALE,
-        range_color=[MIN_EMISSIONS, MAX_EMISSIONS],
+        range_color=[np.log10(THRESHOLDS[1]), np.log10(MAX_EMISSIONS)],
         projection='natural earth',
         title=f"Global CO₂ Emissions in {selected_year}"
     )
@@ -107,11 +110,11 @@ def update_map(selected_year: int):
     fig.update_layout(
         geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular'),
         height=600,
-        margin={"r": 0, "t": 40, "l": 0, "b": 0},
+        margin={"r": 40, "t": 40, "l": 0, "b": 0},
         coloraxis_colorbar=dict(
             title='CO₂ Emissions (tons)',
             ticks='outside',
-            tickvals=THRESHOLDS,
+            tickvals=np.log10(THRESHOLDS[1:]),  # skip zero
             ticktext=TICKTEXTS,
             lenmode='pixels',
             len=400,
@@ -119,7 +122,7 @@ def update_map(selected_year: int):
             yanchor='middle',
             y=0.5,
             xanchor='right',
-            x=1.05,
+            x=1.25,
             ticklen=10,
             tickfont=dict(size=12)
         )

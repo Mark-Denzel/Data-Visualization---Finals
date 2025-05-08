@@ -30,7 +30,7 @@
                     </svg>
                     <a href="{{ url_for('dashboard') }}">Dashboard</a>
                 </li>
-                <li class="flex items-center hover:text-green-400 cursor-pointer transition">
+                <li class="flex items-center text-green-400 cursor-pointer transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                     </svg>
@@ -54,27 +54,45 @@
   </div>
 
 
-  <div class="min-h-screen bg-black py-20 px-8">
-    <div class="max-w-7xl mx-auto">
-      <h1 class="text-4xl font-bold text-green-400 mb-6">Global Climate Map</h1>
-      <p class="text-gray-300 mb-8">Explore climate data across the world. Click on countries to view detailed information.</p>
-      
-      <!-- Map Container -->
-      <div class="flex justify-center mt-10">
-        <iframe src="/co2" width="1000" height="800" class="rounded border-2 border-gray-300"></iframe>
-      </div>
-      
-      <!-- Map Legend (optional) -->
-      <div class="mt-4 text-gray-300">
-        <p>Color intensity represents temperature anomalies (deviation from baseline)</p>
-      </div>
-
-
-
-      <div class="flex justify-center mt-10">
-        <iframe src="/forest" width="1000" height="800" class="rounded border-2 border-gray-300"></iframe>
-      </div>
+<!-- Visualization Container -->
+<div class="max-w-6xl mx-auto p-6 bg-gray-800 rounded-xl shadow-2xl border border-gray-700 mt-12">
+    <select id="mapSelector" class="px-4 py-2 rounded text-black bg-white border border-gray-300 mb-6">
+      <option value="co2">CO₂ Emissions</option>
+      <option value="forest">Forest Area</option>
+      <option value="aqi">Air Quality Index</option>
+      <option value="temperature">Temperature</option>
+    </select>
+  
+  <!-- Map Iframes -->
+  <div class="bg-white p-6 rounded-lg border border-gray-700">
+    <div id="co2Map" class="flex justify-center mt-10">
+      <iframe src="/co2" width="1000" height="800" class="rounded border-2 border-gray-300"></iframe>
+    </div>
+    <div id="forestMap" class="flex justify-center mt-10 hidden">
+      <iframe src="/forest" width="1000" height="800" class="rounded border-2 border-gray-300"></iframe>
+    </div>
+    <div id="aqiMap" class="flex justify-center mt-10 hidden">
+      <iframe src="/aqi" width="1000" height="800" class="rounded border-2 border-gray-300"></iframe>
+    </div>
+    <div id="temperatureMap" class="flex justify-center mt-10 hidden">
+      <iframe src="/temperature" width="1000" height="800" class="rounded border-2 border-gray-300"></iframe>
     </div>
   </div>
+</div>
+  
+  <!-- Selector Toggle Script -->
+  <script>
+    document.getElementById('mapSelector').addEventListener('change', function () {
+      const selected = this.value;
+  
+      document.getElementById('co2Map').classList.add('hidden');
+      document.getElementById('forestMap').classList.add('hidden');
+      document.getElementById('aqiMap').classList.add('hidden');
+      document.getElementById('temperatureMap').classList.add('hidden');
+  
+      document.getElementById(selected + 'Map').classList.remove('hidden');
+    });
+  </script>
+  
 </body>
 </html>
