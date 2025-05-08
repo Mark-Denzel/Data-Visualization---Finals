@@ -15,8 +15,8 @@ df['Year'] = df['Date'].dt.year
 numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
 numeric_cols = [col for col in numeric_cols if col not in ['Year']]
 
-# Initialize the Dash app
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], requests_pathname_prefix="/dash/")
+server = app.server 
 
 app.layout = dbc.Container([
     html.H1("Environmental Pollution Data Correlation Analysis", className="mb-4 text-center"),
@@ -103,5 +103,3 @@ def update_heatmap(year_range):
     
     return fig
 
-if __name__ == '__main__':
-    app.run(debug=True, port=8050)

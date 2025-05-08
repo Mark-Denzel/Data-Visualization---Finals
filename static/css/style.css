@@ -1,9 +1,10 @@
 
 body {
   margin: 0;
-  background: 
-    linear-gradient(to bottom right, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 40%, transparent 80%),
-    url('imgs/background/background.png') no-repeat center center;
+  background: #2c3e50;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3498db, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   background-size: cover;
   scroll-behavior: smooth;
 }
@@ -51,3 +52,4 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+

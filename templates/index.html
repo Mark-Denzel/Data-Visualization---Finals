@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Global Shift</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="relative bg-black">
 
 <!-- Hero Section -->
 <div class="hero text-center text-white flex flex-col justify-center items-center h-screen bg-cover bg-center">
-  <h1 class="text-4xl font-bold">Global Shift</h1>
-  <h3 class="text-xl text-gray-300">Visualizing Climate Impact</h3>
+  <h1 class="text-6xl font-bold">Global Shift</h1>
+  <h3 class="text-2xl text-gray-300">Visualizing Climate Impact</h3>
 
   <!-- Scroll Button -->
   <a href="#homePage" class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
@@ -46,25 +47,25 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
               </svg>
-              <a href="dashboard.html">Dashbaord</a>
+              <a href="{{ url_for('dashboard') }}">Dashboard</a>
           </li>
           <li class="flex items-center hover:text-green-400 cursor-pointer transition">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
               </svg>
-              <a href="worldmap.html">World Map</a>
+              <a href="{{ url_for('worldmap') }}">World Map</a>
           </li>
           <li class="flex items-center hover:text-green-400 cursor-pointer transition">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
-              <a href="analytics.html">Analytics</a>
+              <a href="{{ url_for('analytics') }}">Analytics</a>
           </li>
           <li class="flex items-center hover:text-green-400 cursor-pointer transition">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
               </svg>
-              <a href="datasets.html">Datasets</a>
+              <a href="{{ url_for('datasets') }}">Datasets</a>
           </li>
       </ul>
   </div>
@@ -74,7 +75,7 @@
     <div id="homePage" class="flex flex-col bg-black mt-20">
         <div class="w-full" style="height: 60vh;">
             <img 
-                src="imgs/background/Impacts of Climate Change in Contrast.png" 
+                src="{{ url_for('static', filename='imgs/background/Impacts of Climate Change in Contrast.png') }}"
                 class="w-full h-full object-cover"
                 alt="Climate Change Impacts Visualization"
             >
@@ -95,7 +96,7 @@
         <!-- Image on Left -->
         <div class="w-full lg:w-1/2">
           <img 
-            src="imgs/background/global-warming.jpg" 
+            src="{{ url_for('static', filename='imgs/background/global-warming.jpg') }}"
             class="w-full h-auto max-h-[60vh] object-cover rounded-lg shadow-xl"
             alt="Global Warming Visualization"
           >
@@ -165,7 +166,7 @@
         <!-- Image on Right -->
         <div class="w-full lg:w-1/2 order-1 lg:order-2">
           <img 
-            src="imgs/background/05-may_sea-level-rise.png" 
+            src="{{ url_for('static', filename='imgs/background/05-may_sea-level-rise.png') }}"
             class="w-full h-auto max-h-[60vh] object-cover rounded-lg shadow-xl"
             alt="Sea Level Rise Visualization"
           >
@@ -177,7 +178,7 @@
         <!-- Image on Left -->
         <div class="w-full lg:w-1/2">
           <img 
-            src="imgs/background/PHOTO-Climate-Collage-Diagonal-Design-NOAA-Communications-NO-NOAA-Logo.jpg" 
+            src="{{ url_for('static', filename='imgs/background/PHOTO-Climate-Collage-Diagonal-Design-NOAA-Communications-NO-NOAA-Logo.jpg') }}"
             class="w-full h-auto max-h-[60vh] object-cover rounded-lg shadow-xl"
             alt="Weather Pattern Disruption"
           >
