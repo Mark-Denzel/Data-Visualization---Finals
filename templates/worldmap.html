@@ -5,16 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Global Shift</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
-
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
 </head>
 <body class="relative bg-black">
 <!-- Spacer for navbar height -->
@@ -28,7 +18,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div class="text-4xl font-bold cursor-pointer hover:text-green-400 transition">
-                    <a href="../index.html">K L I M A</a>
+                    <a href="{{ url_for('home') }}">K L I M A</a>
                 </div>
             </div>
             
@@ -38,7 +28,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                     </svg>
-                    <a href="dashboard.html">Dashboard</a>
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
                 </li>
                 <li class="flex items-center hover:text-green-400 cursor-pointer transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,13 +40,13 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
-                    <a href="analytics.html">Analytics</a>
+                    <a href="{{ url_for('analytics') }}">Analytics</a>
                 </li>
                 <li class="flex items-center hover:text-green-400 cursor-pointer transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
                     </svg>
-                    <a href="datasets.html">Datasets</a>
+                    <a href="{{ url_for('datasets') }}">Datasets</a>
                 </li>
             </ul>
         </div>
@@ -70,81 +60,21 @@
       <p class="text-gray-300 mb-8">Explore climate data across the world. Click on countries to view detailed information.</p>
       
       <!-- Map Container -->
-      <div id="world-map" class="h-[600px] rounded-xl overflow-hidden shadow-2xl border-2 border-green-400"></div>
+      <div class="flex justify-center mt-10">
+        <iframe src="/co2" width="1000" height="800" class="rounded border-2 border-gray-300"></iframe>
+      </div>
       
       <!-- Map Legend (optional) -->
       <div class="mt-4 text-gray-300">
         <p>Color intensity represents temperature anomalies (deviation from baseline)</p>
       </div>
+
+
+
+      <div class="flex justify-center mt-10">
+        <iframe src="/forest" width="1000" height="800" class="rounded border-2 border-gray-300"></iframe>
+      </div>
     </div>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize the map
-      const map = L.map('world-map').setView([20, 0], 2);
-      
-      // Add tile layer (you can use different map styles)
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 8,
-        minZoom: 2
-      }).addTo(map);
-      
-      // Example: Add some sample data (in a real app, you'd load real climate data)
-      const sampleData = {
-        "USA": { tempChange: 1.2, co2: 15.5 },
-        "BRA": { tempChange: 0.8, co2: 2.2 },
-        "CHN": { tempChange: 1.5, co2: 10.1 },
-        "IND": { tempChange: 1.1, co2: 2.6 },
-        "ZAF": { tempChange: 0.9, co2: 1.4 }
-      };
-      
-      // Function to get color based on temperature change
-      function getColor(tempChange) {
-        return tempChange > 1.5 ? '#d73027' :
-               tempChange > 1.0 ? '#fc8d59' :
-               tempChange > 0.5 ? '#fee08b' :
-                                 '#91cf60';
-      }
-      
-      // Load GeoJSON data (simplified example)
-      fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
-        .then(response => response.json())
-        .then(data => {
-          L.geoJSON(data, {
-            style: function(feature) {
-              const countryCode = feature.properties.iso_a3;
-              const countryData = sampleData[countryCode] || { tempChange: 0 };
-              return {
-                fillColor: getColor(countryData.tempChange),
-                weight: 1,
-                opacity: 1,
-                color: 'white',
-                fillOpacity: 0.7
-              };
-            },
-            onEachFeature: function(feature, layer) {
-              const countryCode = feature.properties.iso_a3;
-              const countryData = sampleData[countryCode] || { tempChange: 0, co2: 0 };
-              
-              layer.bindPopup(`
-                <b>${feature.properties.name}</b><br>
-                Temperature change: ${countryData.tempChange}°C<br>
-                CO2 emissions: ${countryData.co2} tons per capita
-              `);
-              
-              layer.on('mouseover', function() {
-                this.setStyle({ weight: 3 });
-              });
-              
-              layer.on('mouseout', function() {
-                this.setStyle({ weight: 1 });
-              });
-            }
-          }).addTo(map);
-        });
-    });
-    </script>
 </body>
 </html>
