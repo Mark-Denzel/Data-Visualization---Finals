@@ -52,12 +52,6 @@ app.layout = html.Div([
         )
     ], className='slider-container'),
     dcc.Graph(id='temperature-map', className='map-container'),
-    html.Div([
-        html.P("Temperature color scale (°C)", style={'textAlign': 'center', 'marginBottom': '8px'}),
-        html.Div([
-            html.Img(src='assets/color_scale_legend.png', style={'height': '30px', 'width': '100%'})
-        ], style={'textAlign': 'center'})
-    ])
 ], className='main-container')
 
 @app.callback(
@@ -80,15 +74,33 @@ def update_map(selected_year):
     )
 
     fig.update_layout(
-        geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular'),
+        geo=dict(
+            showframe=False,
+            showcoastlines=True,
+            projection_type='equirectangular'
+        ),
         height=600,
-        margin={"r": 0, "t": 40, "l": 0, "b": 0},
+        margin={"r": 0, "t": 40, "l": 0, "b": 80},  # extra bottom space
         coloraxis_colorbar=dict(
-            title='Temperature (°C)',
+            title=dict(
+                text='Temperature (°C)',
+                font=dict(size=12),
+                side='top' 
+            ),
+            orientation='h',
             ticks='outside',
             tickvals=[-15, -10, -5, 0, 5, 10, 15, 20, 25, 30],
-            ticktext=['-15°C', '-10°C', '-5°C', '0°C', '5°C', '10°C', '15°C', '20°C', '25°C', '30°C']
+            ticktext=['-15°C', '-10°C', '-5°C', '0°C', '5°C', '10°C', '15°C', '20°C', '25°C', '30°C'],
+            len=0.8,
+            thickness=20,
+            x=0.5,
+            xanchor='center',
+            y=-0.25,
+            yanchor='top',
+            ticklen=10,
+            tickfont=dict(size=11)
         )
     )
+
 
     return fig

@@ -81,24 +81,33 @@ def update_map(selected_year: int):
     )
     
     fig.update_layout(
-        geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular'),
+        geo=dict(
+            showframe=False,
+            showcoastlines=True,
+            projection_type='equirectangular'
+        ),
         height=600,
-        margin={"r": 40, "t": 40, "l": 0, "b": 0},
+        margin={"r": 40, "t": 40, "l": 0, "b": 80},  # increase bottom margin
         coloraxis_colorbar=dict(
-            title='Forest Area (Hectares)',
+            title=dict(
+                text='Forest Area (Hectares)',
+                font=dict(size=12),
+                side='top' 
+            ),
+            orientation='h',
             ticks='outside',
             tickvals=np.log10(COLOR_SCALE_BREAKPOINTS),
             ticktext=TICKTEXT,
-            lenmode='pixels',
-            len=400,
+            len=0.8,  # as fraction of plot width
             thickness=20,
-            yanchor='middle',
-            y=0.5,
-            xanchor='left',
-            x=1.15,
+            x=0.5,
+            xanchor='center',
+            y=-0.25,
+            yanchor='top',
             ticklen=10,
-            tickfont=dict(size=12)
+            tickfont=dict(size=11)
         )
     )
+
     
     return fig

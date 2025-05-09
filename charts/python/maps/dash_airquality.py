@@ -82,22 +82,33 @@ def update_map(selected_date_idx: int):
     fig.update_layout(
         geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular'),
         height=600,
-        margin={"r": 0, "t": 40, "l": 0, "b": 0},
+        margin={"r": 40, "t": 40, "l": 0, "b": 80},  # Increased bottom margin
         coloraxis_colorbar=dict(
-            title='AQI Value',
+            title=dict(
+                text='AQI Value',
+                font=dict(size=12),
+                side='top' 
+            ),
+            orientation='h',
+            x=0.5,
+            y=-0.25,
+            xanchor='center',
+            yanchor='top',
             ticks='outside',
-            tickvals=[0, 50, 100, 150, 200, 300, 400, 500],
+            tickvals=[0, 50, 100, 200, 300, 400, 500],
             ticktext=[
                 '0',
-                '50 (Good)',
-                '100 (Moderate)',
-                '150 (Unhealthy for Sensitive)',
-                '200 (Unhealthy)',
-                '300 (Very Unhealthy)',
-                '400 (Hazardous)',
-                '500 (Severe)'
-            ]
+                '50\n(Good)',
+                '100\n(Moderate)',
+                '200\n(Unhealthy)',
+                '300\n(Very Unhealthy)',
+                '400\n(Hazardous)',
+                '500\n(Severe)'
+            ],
+            tickfont=dict(size=10),
+            len=0.8
         )
+
     )
 
     return fig

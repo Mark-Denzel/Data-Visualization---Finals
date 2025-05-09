@@ -64,26 +64,6 @@ app.layout = html.Div([
         )
     ], className='slider-container'),
     dcc.Graph(id='emissions-map', className='map-container'),
-    html.Div([
-        html.P("CO₂ Emissions Color Scale", style={'text-align': 'center', 'margin-bottom': '5px'}),
-        html.Div([
-            html.Span("0", style={'float': 'left', 'margin-left': '5%'}),
-            html.Span("3m", style={'float': 'left', 'margin-left': '7%'}),
-            html.Span("10m", style={'float': 'left', 'margin-left': '7%'}),
-            html.Span("30m", style={'float': 'left', 'margin-left': '6%'}),
-            html.Span("100m", style={'float': 'left', 'margin-left': '5%'}),
-            html.Span("300m", style={'float': 'left', 'margin-left': '4%'}),
-            html.Span("1b", style={'float': 'left', 'margin-left': '5%'}),
-            html.Span("3b", style={'float': 'left', 'margin-left': '5%'}),
-            html.Span("10b", style={'float': 'right', 'margin-right': '5%'})
-        ], style={
-            'background': 'linear-gradient(to right, #FFF5F0, #FEE0D2, #FCBBA1, #FC9272, #FB6A4A, #EF3B2C, #CB181D, #67000D)',
-            'height': '30px',
-            'width': '90%',
-            'margin': '0 auto',
-            'border-radius': '5px'
-        })
-    ], style={'text-align': 'center', 'width': '100%', 'margin': '20px auto'})
 ])
 
 @app.callback(
@@ -108,24 +88,33 @@ def update_map(selected_year: int):
     )
 
     fig.update_layout(
-        geo=dict(showframe=False, showcoastlines=True, projection_type='equirectangular'),
+        geo=dict(
+            showframe=False,
+            showcoastlines=True,
+            projection_type='equirectangular'
+        ),
         height=600,
-        margin={"r": 40, "t": 40, "l": 0, "b": 0},
+        margin={"r": 40, "t": 40, "l": 0, "b": 80},  # more bottom space
         coloraxis_colorbar=dict(
-            title='CO₂ Emissions (tons)',
+            title=dict(
+                text='CO₂ Emissions (tons)',
+                font=dict(size=12),
+                side='top' 
+            ),
+            orientation='h',
             ticks='outside',
             tickvals=np.log10(THRESHOLDS[1:]),  # skip zero
-            ticktext=TICKTEXTS,
-            lenmode='pixels',
-            len=400,
+            ticktext=TICKTEXTS,  # You can simplify/shorten these if overlapping
+            len=0.8,  # bar width as fraction of plot width
             thickness=20,
-            yanchor='middle',
-            y=0.5,
-            xanchor='right',
-            x=1.25,
+            x=0.5,
+            xanchor='center',
+            y=-0.25,
+            yanchor='top',
             ticklen=10,
-            tickfont=dict(size=12)
+            tickfont=dict(size=11)
         )
     )
+
 
     return fig
