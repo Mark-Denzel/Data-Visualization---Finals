@@ -1,18 +1,14 @@
-# charts/python/dash_forestmap.py
-
 import pandas as pd
 import plotly.express as px
 from dash import Dash, dcc, html, Input, Output
 import numpy as np
 
-# Constants
 DATA_FILE = "datasets/map_forest_area.csv"
 YEAR_COL = 'Year'
 COUNTRY_COL = 'Entity'
 CODE_COL = 'Code'
 FOREST_COL = 'Forest area'
 
-# Color scale and thresholds
 COLOR_SCALE_BREAKPOINTS = [
     500_000, 1_000_000, 5_000_000, 10_000_000,
     50_000_000, 100_000_000, 500_000_000, 1_000_000_000
@@ -29,13 +25,11 @@ COLOR_SCALE = [
     [1.0, "#002010"]
 ]
 
-# Load and preprocess
 df = pd.read_csv(DATA_FILE)
 df[YEAR_COL] = pd.to_numeric(df[YEAR_COL], errors='coerce')
 df[FOREST_COL] = pd.to_numeric(df[FOREST_COL], errors='coerce')
 df = df[df[YEAR_COL].between(1990, 2020)]
 
-# Create Dash app
 app = Dash(__name__, requests_pathname_prefix='/forest/')
 server = app.server
 
