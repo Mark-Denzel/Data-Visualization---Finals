@@ -36,7 +36,7 @@
                     </svg>
                     <a href="{{ url_for('worldmap') }}">Worldmap</a>
                 </li>
-                <li class="flex items-center hover:text-green-400 cursor-pointer transition">
+                <li class="flex items-center text-green-400 cursor-pointer transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
@@ -58,16 +58,25 @@
 <div class="max-w-6xl mx-auto p-6 bg-gray-800 rounded-xl shadow-2xl border border-gray-700 mt-12">
     <!-- Title -->
     <h2 class="text-2xl font-bold text-green-400 mb-6 text-center">
-      Pollution Data Visualization
+      Correlation Data Visualization
     </h2>
   
-    <!-- Visualization Graph -->
+    <!-- Selector -->
+    <div class="flex justify-left mb-6">
+      <select id="vizSelector" class="px-4 py-2 rounded text-black bg-white border border-gray-300">
+        <option value="pollution">Environmental Pollution</option>
+        <option value="climate">Climate Change</option>
+      </select>
+    </div>
+  
+    <!-- Visualization Graphs -->
     <div class="bg-white p-6 rounded-lg border border-gray-700">
-        <div class="flex justify-center mt-10">
-            <iframe src="/dash" width="1000" height="1000" class="rounded border-2 border-gray-300"></iframe>
-          </div>
-          
-          
+      <div id="pollutionIframe" class="flex justify-center mt-10">
+        <iframe src="/dash" width="1000" height="1000" class="rounded border-2 border-gray-300"></iframe>
+      </div>
+      <div id="climateIframe" class="flex justify-center mt-10 hidden">
+        <iframe src="/climate" width="1000" height="1100" class="rounded border-2 border-gray-300"></iframe>
+      </div>
     </div>
   
     <!-- Footer Note -->
@@ -75,6 +84,16 @@
       Data ranges from 2000 to present. Hover over graphs for detailed metrics.
     </p>
   </div>
+  
+  <!-- Toggle Script -->
+  <script>
+    document.getElementById('vizSelector').addEventListener('change', function () {
+      const selected = this.value;
+      document.getElementById('pollutionIframe').classList.toggle('hidden', selected !== 'pollution');
+      document.getElementById('climateIframe').classList.toggle('hidden', selected !== 'climate');
+    });
+  </script>
+  
   
 </body>
 </html>
