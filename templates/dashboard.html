@@ -55,59 +55,84 @@
     </nav>
   </div>
 
-  <div class="min-h-screen bg-black py-20 px-4 sm:px-6 lg:px-8">
-    <!-- Dashboard Header -->
-    <div class="max-w-8xl mx-auto mb-8">
-      <h1 class="text-3xl font-bold text-green-400">Climate Dashboard</h1>
-      <p class="text-gray-400 mt-2">Real-time monitoring of global climate indicators</p>
-      
-      <!-- Date/Time and Stats Row -->
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 gap-4">
-        <div class="text-gray-300">
-          <span id="current-date" class="font-medium"></span>
+    <div class="min-h-screen bg-black py-20 px-4 sm:px-6 lg:px-8">
+        <!-- Dashboard Header -->
+        <div class="max-w-8xl mx-auto mb-8">
+            <h1 class="text-3xl font-bold text-green-400">Climate Dashboard</h1>
+            <p class="text-gray-400 mt-2">Real-time monitoring of global climate indicators</p>
+            
+            <!-- Date/Time and Stats Row -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 gap-4">
+                <div class="text-gray-300">
+                    <span id="current-date" class="font-medium">May 09, 2025 21:25</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full sm:w-auto">
+                    <!-- Stat Cards -->
+                    <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-green-500">
+                        <p class="text-gray-400 text-sm">Global Temp</p>
+                        <p class="text-2xl font-bold text-white">+2.3°C</p>
+                        <p class="text-xs text-gray-500">+13.9% since 1940</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-blue-500">
+                        <p class="text-gray-400 text-sm">CO₂ Level</p>
+                        <p class="text-2xl font-bold text-white">74466.6M tons</p>
+                        <p class="text-xs text-gray-500">+615.5% since 1949</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-yellow-500">
+                        <p class="text-gray-400 text-sm">Sea Level Rise</p>
+                        <p class="text-2xl font-bold text-white">+29.5mm</p>
+                        <p class="text-xs text-gray-500">Total increase since 2000</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-red-500">
+                        <p class="text-gray-400 text-sm">Global Population</p>
+                        <p class="text-2xl font-bold text-white">8.1B</p>
+                        <p class="text-xs text-gray-500">in 2023</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full sm:w-auto">
-          <!-- Stat Cards -->
-          <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-green-500">
-            <p class="text-gray-400 text-sm">Global Temp</p>
-            <p class="text-2xl font-bold text-white">+1.2°C</p>
-            <p class="text-xs text-gray-500">since 1900</p>
-          </div>
-          <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-blue-500">
-            <p class="text-gray-400 text-sm">CO₂ Level</p>
-            <p class="text-2xl font-bold text-white">419 ppm</p>
-            <p class="text-xs text-gray-500">+50% since 1850</p>
-          </div>
-          <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-yellow-500">
-            <p class="text-gray-400 text-sm">Sea Level</p>
-            <p class="text-2xl font-bold text-white">+102mm</p>
-            <p class="text-xs text-gray-500">since 1993</p>
-          </div>
-          <div class="bg-gray-800 rounded-lg p-4 border-l-4 border-red-500">
-            <p class="text-gray-400 text-sm">Arctic Ice</p>
-            <p class="text-2xl font-bold text-white">-13.1%</p>
-            <p class="text-xs text-gray-500">per decade</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-<!-- Main Dashboard Grid -->
-<div class="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-  
-  <!-- Plastic Waste Chart -->
-  <div class="bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-800">
-    <div class="relative" id="temperature-chart">
+  <!-- Main Dashboard Grid -->
+  <div class="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 px-4 mt-10">
+
+    <!-- Plastic Waste Chart -->
+    <div class="bg-gray-900 rounded-xl p-6 shadow-xl border border-gray-800">
+      <h2 class="text-xl font-semibold text-green-400 mb-4 text-center">Plastic Waste Over Time</h2>
       <div class="relative pb-[62.5%] h-0">
         <iframe 
           src="{{ url_for('static', filename='plastic_waste_chart.html') }}"
-          class="absolute top-0 left-0 w-full h-full"
+          class="absolute top-0 left-0 w-full h-full rounded-xl border border-gray-700"
           frameborder="0"
-          style="border:none;">
+          style="background-color: white;">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Extreme Weather Events Chart -->
+    <div class="bg-gray-900 rounded-xl p-6 shadow-xl border border-gray-800">
+      <h2 class="text-xl font-semibold text-green-400 mb-4 text-center">Extreme Weather Events (2000–2023)</h2>
+      <div class="relative" style="height: 560px;">
+        <iframe 
+          src="/weather-events"
+          class="w-full h-full rounded-xl border border-gray-700"
+          frameborder="0"
+          style="background-color: white;">
         </iframe>
       </div>
     </div>
   </div>
+
+  <div class="bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-800">
+    <h2 class="text-xl font-semibold text-green-400 mb-4 text-center">Plastic Waste VS Plastic Recycled</h2>
+    <div class="relative pb-[62.5%] h-0">
+      <iframe 
+        src="/plastic-waste"
+        class="absolute top-0 left-0 w-full h-full rounded-lg border border-gray-700"
+        frameborder="0">
+      </iframe>
+    </div>
+  </div>
+
+
 </div>
 
       
