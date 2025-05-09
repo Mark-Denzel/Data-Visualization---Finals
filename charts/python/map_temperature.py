@@ -70,7 +70,7 @@ class GlobalTemperatureVisualizer:
                     marks=None,
                     step=1,
                     tooltip={"placement": "bottom", "always_visible": True},
-                    updatemode='drag'  # Enable live updates while dragging
+                    updatemode='drag'
                 )
             ], className='slider-container'),
             dcc.Graph(id='temperature-map', className='map-container'),

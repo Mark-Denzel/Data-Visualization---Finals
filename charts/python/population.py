@@ -26,7 +26,6 @@ class BubbleChart:
         self.maxstep = 2 * self.bubbles[:, 2].max() + self.bubble_spacing
         self.step_dist = self.maxstep / 2
 
-        # calculate initial grid layout for bubbles
         length = np.ceil(np.sqrt(len(self.bubbles)))
         grid = np.arange(length) * self.maxstep
         gx, gy = np.meshgrid(grid, grid)
@@ -69,32 +68,22 @@ class BubbleChart:
             moves = 0
             for i in range(len(self.bubbles)):
                 rest_bub = np.delete(self.bubbles, i, 0)
-                # try to move directly towards the center of mass
-                # direction vector from bubble to the center of mass
                 dir_vec = self.com - self.bubbles[i, :2]
 
-                # shorten direction vector to have length of 1
                 dir_vec = dir_vec / np.sqrt(dir_vec.dot(dir_vec))
 
-                # calculate new bubble position
                 new_point = self.bubbles[i, :2] + dir_vec * self.step_dist
                 new_bubble = np.append(new_point, self.bubbles[i, 2:4])
 
-                # check whether new bubble collides with other bubbles
                 if not self.check_collisions(new_bubble, rest_bub):
                     self.bubbles[i, :] = new_bubble
                     self.com = self.center_of_mass()
                     moves += 1
                 else:
-                    # try to move around a bubble that you collide with
-                    # find colliding bubble
                     for colliding in self.collides_with(new_bubble, rest_bub):
-                        # calculate direction vector
                         dir_vec = rest_bub[colliding, :2] - self.bubbles[i, :2]
                         dir_vec = dir_vec / np.sqrt(dir_vec.dot(dir_vec))
-                        # calculate orthogonal vector
                         orth = np.array([dir_vec[1], -dir_vec[0]])
-                        # test which direction to go
                         new_point1 = (self.bubbles[i, :2] + orth *
                                       self.step_dist)
                         new_point2 = (self.bubbles[i, :2] - orth *
@@ -112,20 +101,16 @@ class BubbleChart:
             if moves / len(self.bubbles) < 0.1:
                 self.step_dist = self.step_dist / 2
 
-# Load the data
 df = pd.read_csv('datasets/population.csv')
 df['population_millions'] = df['population'] / 1_000_000
 
-# Get unique years and countries
 years = sorted(df['Year'].unique())
 min_year, max_year = min(years), max(years)
 countries = df['Entity'].unique()
 
-# Create figure and axis
 fig, ax = plt.subplots(figsize=(12, 10))
 plt.subplots_adjust(bottom=0.25)
 
-# Create slider axis
 ax_slider = plt.axes([0.2, 0.1, 0.6, 0.03])
 year_slider = Slider(
     ax=ax_slider,
@@ -136,7 +121,6 @@ year_slider = Slider(
     valstep=1
 )
 
-# Store bubbles, labels, and data for updating
 circles = []
 labels = []
 current_year_df = None
@@ -184,10 +168,8 @@ def update(val):
     global current_year_df
     year = int(year_slider.val)
     
-    # Filter data for the selected year
     current_year_df = df[df['Year'] == year].sort_values('population', ascending=False).head(30)
     
-    # Clear previous bubbles and labels
     for circ in circles:
         circ.remove()
     circles.clear()
@@ -196,14 +178,11 @@ def update(val):
         label.remove()
     labels.clear()
     
-    # Create new bubble chart
     bubble_chart = BubbleChart(area=current_year_df['population_millions'], bubble_spacing=0.1)
     bubble_chart.collapse()
     
-    # Generate colors based on population
     colors = plt.cm.viridis(np.linspace(0, 1, len(current_year_df)))
     
-    # Plot bubbles
     for i in range(len(bubble_chart.bubbles)):
         circ = Circle(
             bubble_chart.bubbles[i, :2], 
@@ -213,9 +192,8 @@ def update(val):
         )
         ax.add_patch(circ)
         circles.append(circ)
-        
-        # Add country name if bubble is large enough
-        if bubble_chart.bubbles[i, 2] > 0.5:  # Only label larger bubbles
+
+        if bubble_chart.bubbles[i, 2] > 0.5:
             label = ax.text(
                 *bubble_chart.bubbles[i, :2], 
                 current_year_df.iloc[i]['Entity'],
@@ -230,10 +208,8 @@ def update(val):
     ax.autoscale_view()
     fig.canvas.draw_idle()
 
-# Initialize with first year
 update(min_year)
 
-# Register update function with slider
 year_slider.on_changed(update)
 
 plt.axis('off')

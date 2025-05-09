@@ -6,8 +6,6 @@ import dash_bootstrap_components as dbc
 
 df = pd.read_csv('datasets/Pollution_Dataset.csv')
 
-# Data preprocessing
-# Convert Date to datetime and extract year
 df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%Y', errors='coerce')
 df['Year'] = df['Date'].dt.year
 
