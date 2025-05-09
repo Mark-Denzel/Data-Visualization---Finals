@@ -13,6 +13,12 @@ from charts.python.maps.dash_temperaturemap import server as dash_temperature_se
 from charts.python.heatmaps.dash_correlation_pollution import server as dash_correlation_polution_server
 from charts.python.heatmaps.dash_correlation_climate_change import server as dash_correlation_climate_change_server
 
+#Bar Chart
+from charts.python.timeseriescharts.dash_weather_server import server as dash_weather_server
+
+# Line Graph
+from charts.python.timeseriescharts.dash_plastic_waste import server as dash_plastic_server
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -46,6 +52,12 @@ application = DispatcherMiddleware(app, {
     "/forest": dash_forest_server,
     "/aqi": dash_aqi_server,
     "/temperature": dash_temperature_server,
+    
+    # Bar Charts
+    "/weather-events": dash_weather_server,
+    
+    # Line Graph
+    "/plastic-waste": dash_plastic_server
 })
 
 if __name__ == "__main__":
